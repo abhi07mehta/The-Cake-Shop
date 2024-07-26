@@ -1,0 +1,28 @@
+.navbar__link{
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+}
+
+.navbar__link:hover {
+    background-color: #C2EDCE;
+    color: black;
+    border-radius: 0px 0px 60px 0px;
+    padding: 5px 10px;
+    /* transform: translateY(-2px); */
+  }
+  
+.navbar__link--active {
+    text-decoration: none;
+    color: white;
+    border-radius: 0px 0px 60px 0px;
+    background-color:  #388087;
+    padding: 5px 10px;
+  }
+  .navbar__link--active:hover {
+    text-decoration: none;
+    color: white;
+    border-radius: 0px 0px 60px 0px;
+    background-color:  #388087;
+    padding: 5px 10px;
+  }

@@ -1,0 +1,55 @@
+.nav-link{
+    text-decoration: none;
+    color: black;
+    padding: 7px 12px 0px 12px;
+}
+
+.nav-link:hover{
+    color: black;
+    border-radius: 40px 40px 0px 0px;
+    padding: 7px 12px 0px 12px;
+    border-bottom:3px solid black ;
+}
+
+.nav-link-active{
+    text-decoration: none;
+    color: white;
+    background-color:  #388087;
+    border-bottom:3px solid black ;
+    padding: 7px 10px 0px 10px;
+}
+
+.nav-link-active:hover{
+    text-decoration: none;
+    color: white;
+    background-color:  #388087;
+    border-bottom:3px solid black ;
+    padding: 7px 10px 0px 10px;
+}
+
+.cart{
+    text-decoration: none;
+    color: white;
+    background-color: #388087;
+    padding: 7px 10px;
+    margin: 0px 15px;
+    border-radius: 5px;
+}
+
+.cart:hover{
+    color: black;
+}
+
+.cart-active{
+    text-decoration: none;
+    color: black;
+    background-color: #388087;
+    padding: 7px 10px;
+    margin: 0px 15px;
+    border-radius: 5px;
+    border: solid black 3px;
+}
+
+.cart-active:hover{
+    color: black;
+}
