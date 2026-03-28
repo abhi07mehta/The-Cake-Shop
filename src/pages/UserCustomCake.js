@@ -3,7 +3,7 @@ import { Col, Container, Form,  Row, Spinner, Image } from "react-bootstrap";
 import HeaderUser from "../components/HeaderUser";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase";
-import "firebase/firestore";
+// import "firebase/firestore";
 import { collection, getDocs,  query, where} from "firebase/firestore";
 import FooterHome from "../components/FooterHome";
 import caketype1 from '../assets/satu.png'

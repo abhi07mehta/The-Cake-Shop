@@ -7,179 +7,146 @@ import homeCupcake from "../assets/homeCupCake.jpg"
 import homepudding from "../assets/homePudding.jpg"
 import customer1 from "../assets/homecustomer1.jpg"
 import customer2 from "../assets/homecustomer2.jpg"
-import aboutus from "../assets/qiu.jpeg"
-// import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa"
+import aboutus from "../assets/homeCake.jpg"
 import FooterHome from "../components/FooterHome";
 
 const Home = () => {
     return (
-        <>
-            <Container fluid className="p-0 overflow-hidden">
-                <Row className="g-0 mb-5"
-                    // style={{ backgroundImage: "radial-gradient( circle 1136px at 5.2% 14%,  rgba(255,255,255,1) 0%, rgba(234,168,17,1) 100.2% )" }}
-                >
-                    <HeaderHome ></HeaderHome>
-                </Row>
+        <div style={{ backgroundColor: "var(--background)" }}>
+            <HeaderHome />
 
-                <Row className="g-0">
-                    <Col className="bg-image d-flex flex-column justify-content-center"
-                        style={{ backgroundImage: `url(${bgImage})`, height: "100vh", backgroundSize: "cover", backgroundRepeat: "no-repeat",
-                        filter: "brightness(2.3) grayscale(0.2) opacity(1)"
-                    }}
-                    >
-                        <h1 className="mx-5 my-2"
-                            style={{ color: "white" }}
-                        >
-                            The Cake Shop
-                        </h1>
-                        <p className="w-25 mx-5 my-2"
-                            style={{ color: "white" }}
-                        >Produced through strict supervision and quality standards. Cooked from a special combination of the best ingredients and technology. The perfect delicious cake, especially for you</p>
-                    </Col>
-                </Row>
-                <Row className="g-0">
-                    <Row
-                        style={{ backgroundColor: "#C2EDCE", 
-                        backgroundImage: "linear-gradient( 174.2deg,  #C2EDCE 7.1%, #BADFE7 67.4% )" 
-                    }}
-                        className="py-2 my-2 g-0">
-                        <h2 className="text-center">Product</h2>
-                    </Row>
-                    <Row className="g-0">
-                        <Col className="w-25 mx-4 my-3">
-                            <Card className="w-100 shadow-lg p-3 mb-5 bg-body rounded" >
-                                <Card.Img height={"250px"} width={"250px"} variant="top" src={`${homeCupcake}`} />
-                                <Card.Body>
-                                    <Card.Title>Cup Cakes</Card.Title>
-                                    <Card.Text>
-                                    Cupcakes are like miniatures of large cakes that are placed in cups made of various colored paper. Cupcakes have attractive appearance because it is packaged in containers small and beautiful.
-                                    </Card.Text>
-                                    <Button style={{ background: "#388087", border: "none" }}>Click here</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col className="w-25 mx-4 my-3">
-                            <Card className="w-100 shadow-lg p-3 mb-5 bg-body rounded" >
-                                <Card.Img height={"250px"} width={"250px"} variant="top" src={`${homeCake}`} />
-                                <Card.Body>
-                                    <Card.Title>Cakes</Card.Title>
-                                    <Card.Text>Cake made with baking dough consisting of wheat flour, sugar, eggs, milk, fat, and raising agents with or without addition of other permitted food additives.</Card.Text>
-                                    <Button style={{ background: "#388087", border: "none" }}>Click here</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col className="w-25 mx-4 my-3" >
-                            <Card className="w-100 shadow-lg p-3 mb-5 bg-body rounded">
-                                <Card.Img height={"250px"} width={"250px"} variant="top" src={`${homepudding}`} />
-                                <Card.Body>
-                                    <Card.Title>Pudding</Card.Title>
-                                    <Card.Text> Pudding is a dessert dish or what is known as dessert, made from cream or milk, cooked with flour which thickens easily. Namely tapioca flour or corn flour. </Card.Text>
-                                    <Button style={{ background: "#388087", border: "none" }}>Click here</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Row>
-                <Row className="g-0" >
-                <Row
-                        style={{ backgroundColor: "#C2EDCE", 
-                        backgroundImage: "linear-gradient( 174.2deg,  #C2EDCE 7.1%, #BADFE7 67.4% )" 
-                    }}
-                        className="py-2 my-2 g-0">
-                        <h2 className="text-center">Customer Experience</h2>
-                    </Row>
-                    <Row className="justify-content-md-around g-0">
-                        <Col md={3} >
-                            <Card className="shadow p-3 mb-5 rounded" style={{ width: "400px", border: "none",background:"#F6F6F2" }}>
-                                <Card.Img style={{ borderRadius: "50%", width: "100px", height: "100px", margin: "auto" }} variant="top" src={`${customer1}`} />
-                                <Card.Body>
-                                    <Card.Title className="text-center">Nita Ambani</Card.Title>
-                                    <Card.Text className="text-center">The products offered are highly recommended for large and small events with a very delicious taste.</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-
-                        <Col  md={3}>
-                            <Card className="shadow p-3 mb-5 rounded"  style={{ width: "400px", border: "none",background:"#F6F6F2" }}>
-                                <Card.Img style={{ borderRadius: "50%", width: "100px", height: "100px", margin: "auto" }} variant="top" src={`${customer2}`} />
-                                <Card.Body>
-                                    <Card.Title className="text-center">Rohit Sharma</Card.Title>
-                                    <Card.Text className="text-center">The website has an attractive appearance and is easy to understand. The products offered have good taste.
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Row>
-
-                <Row className="g-0">
-                <Row
-                        style={{ backgroundColor: "#C2EDCE", 
-                        backgroundImage: "linear-gradient( 174.2deg,  #C2EDCE 7.1%, #BADFE7 67.4% )" 
-                    }}
-                        className="py-2 my-2 g-0">
-                        <h2 className="text-center">About Us</h2>
-                    </Row>
-                    <Row className="px-5 justify-content-md-center g-0" >
-                        <Col md={3} className="px-5">
-                            <img style={{ borderRadius: "50%" }} width={"250px"} height={"250px"} alt="aboutus" src={`${aboutus}`} />
-                        </Col>
-                        <Col md={6} className="px-5">
-                            <p>
-                            The Cake Shop was founded in 2009 by Mr. Abhishek Mehta. The Cake Shop is located at Lonavala Hill Area near Pune city. In an area famous for its excellent culinary delights, TCS Cakes are one of the favorites of many people who live in the area and beyond
-                            visit the area. TCS Cakes sells several products consisting of cup cakes, pudding and cake.
-                            Apart from that, customers can also order products according to their wishes.
+            {/* Hero Section */}
+            <section className="hero-section">
+                <div className="hero-overlay"></div>
+                <img 
+                    src={bgImage} 
+                    alt="Bakery background" 
+                    style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} 
+                />
+                <Container className="position-relative" style={{ zIndex: 2 }}>
+                    <Row className="align-items-center justify-content-center text-center">
+                        <Col lg={10}>
+                            <h1 className="heading-jumbo text-white mb-4" style={{textShadow: "0 4px 12px rgba(0,0,0,0.3)"}}>
+                                Crafted with Love.<br/><span style={{ color: "var(--primary)"}}>Baked to Perfection.</span>
+                            </h1>
+                            <p className="lead text-white mx-auto mb-5" style={{ maxWidth: '600px', fontSize: "1.2rem", fontWeight: 300 }}>
+                                Produced through strict supervision and quality standards. A special combination of the best ingredients, especially for you.
                             </p>
+                            <Button className="btn-premium px-5 py-3 fs-5 me-3">Order Now</Button>
+                            <Button className="btn-outline-premium text-white border-white px-5 py-3 fs-5">Our Menu</Button>
                         </Col>
                     </Row>
-                </Row>
-                <Row className="g-0">
-                    {/* <Row 
-                style={{backgroundColor: "#FBAB7E",backgroundImage: "linear-gradient( 174.2deg,  rgba(255,244,228,1) 7.1%, rgba(240,246,238,1) 67.4% )"}}
-                className="p-3 my-3">
-                    <h2 className="text-center">Contact Us</h2>
-                </Row> */}
-                    <Row >
+                </Container>
+            </section>
 
-                    </Row>
-                </Row>
-                {/* <Row
-                    style={{ backgroundImage: "radial-gradient( circle 1136px at 5.2% 14%,  rgba(255,255,255,1) 0%, rgba(234,168,17,1) 100.2% )" }}
-                    className=" px-5 justify-content-md-center g-0">
-                    <Col className="p-4">
-                        <div className="text-center">
-                            <h4>Mobile: 0000000000000</h4>
-                            <h4>Email:asddfadfsdf@gmail.com</h4>
-                        </div>
-                    </Col>
-                    <Col className="p-4">
-                        <div className="text-center">
-                            <h4>Address</h4>
-                            <p> Some quick example text to build on the card title and make up the bulk of
-                                the card's content.Some quick example text to build on the card title and</p>
-                        </div>
-                    </Col>
-                    <Row className="g-0">
-                        <Col md={2}>
-                            <p className="m-1 fs-4">&copy;Copyright:2022</p>
+            {/* Products Section */}
+            <section className="section-padding">
+                <Container>
+                    <div className="section-title-wrapper">
+                        <span className="section-subtitle">Our Specialties</span>
+                        <h2 className="section-title">Discover Our Products</h2>
+                        <div style={{ width: "60px", height: "3px", backgroundColor: "var(--primary)", margin: "0 auto" }}></div>
+                    </div>
+                    
+                    <Row className="g-4">
+                        <Col md={4}>
+                            <Card className="card-premium">
+                                <Card.Img variant="top" src={homeCupcake} />
+                                <Card.Body>
+                                    <h3 className="card-title">Cup Cakes</h3>
+                                    <p className="card-text">
+                                        Miniatures of large cakes placed in beautiful colored cups. Attractive appearance and perfectly portioned for sweet cravings.
+                                    </p>
+                                    <Button className="btn-outline-premium mt-3 w-100">Explore</Button>
+                                </Card.Body>
+                            </Card>
                         </Col>
-                        <Col md={2}>
-                            <div>
-                                <FaInstagram className="m-2 fs-4" />
-                                <FaFacebook className="m-2 fs-4" />
-                                <FaWhatsapp className="m-2 fs-4" />
+                        <Col md={4}>
+                            <Card className="card-premium">
+                                <Card.Img variant="top" src={homeCake} />
+                                <Card.Body>
+                                    <h3 className="card-title">Signature Cakes</h3>
+                                    <p className="card-text">
+                                        Masterpieces made with premium wheat flour, sugar, eggs, and rich butter. Perfect for birthdays, weddings, or any celebration.
+                                    </p>
+                                    <Button className="btn-outline-premium mt-3 w-100">Explore</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col md={4}>
+                            <Card className="card-premium">
+                                <Card.Img variant="top" src={homepudding} />
+                                <Card.Body>
+                                    <h3 className="card-title">Premium Pudding</h3>
+                                    <p className="card-text">
+                                        A classic dessert dish made from rich cream and milk. Silky, smooth, and melts perfectly in your mouth.
+                                    </p>
+                                    <Button className="btn-outline-premium mt-3 w-100">Explore</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+
+            {/* About Us Section */}
+            <section className="section-padding" style={{ backgroundColor: "var(--accent)" }}>
+                <Container>
+                    <Row className="align-items-center g-5">
+                        <Col lg={5} className="text-center position-relative">
+                            <img src={aboutus} alt="About The Cake Shop" className="img-fluid img-blob" style={{ maxWidth: '400px', height: '400px' }} />
+                        </Col>
+                        <Col lg={7}>
+                            <span className="section-subtitle">Our Story</span>
+                            <h2 className="section-title mb-4">A Legacy of Sweetness</h2>
+                            <p className="fs-5 mb-4" style={{ color: "var(--secondary)", lineHeight: 1.8 }}>
+                                Founded in 2009 by Mr. Abhishek Mehta, The Cake Shop is located in the beautiful Lonavala Hill Area near Pune city. 
+                            </p>
+                            <p className="text-muted mb-4" style={{ lineHeight: 1.8 }}>
+                                In an area famous for its excellent culinary delights, TCS Cakes are a favorite for locals and visitors alike. We specialize in cupcakes, puddings, custom event cakes, and memories.
+                            </p>
+                            <Button className="btn-premium">Read the Full Story</Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="section-padding">
+                <Container>
+                    <div className="section-title-wrapper">
+                        <span className="section-subtitle">Testimonials</span>
+                        <h2 className="section-title">What Our Customers Say</h2>
+                        <div style={{ width: "60px", height: "3px", backgroundColor: "var(--primary)", margin: "0 auto" }}></div>
+                    </div>
+
+                    <Row className="g-4 justify-content-center">
+                        <Col md={5}>
+                            <div className="testimonial-card">
+                                <img src={customer1} className="testimonial-img" alt="Customer" />
+                                <h4>Nita Ambani</h4>
+                                <p className="testimonial-text mt-3">
+                                    "The products offered are highly recommended for large and small events with a very delicious taste. The presentation is incredibly elegant."
+                                </p>
+                                <div style={{ color: "#f5b301", fontSize: "1.2rem", marginTop: "1rem" }}>★★★★★</div>
                             </div>
-
+                        </Col>
+                        <Col md={5}>
+                            <div className="testimonial-card">
+                                <img src={customer2} className="testimonial-img" alt="Customer" />
+                                <h4>Rohit Sharma</h4>
+                                <p className="testimonial-text mt-3">
+                                    "The website has an attractive appearance and is easy to use. Most importantly, the cakes are absolutely phenomenal!"
+                                </p>
+                                <div style={{ color: "#f5b301", fontSize: "1.2rem", marginTop: "1rem" }}>★★★★★</div>
+                            </div>
                         </Col>
                     </Row>
+                </Container>
+            </section>
 
-                </Row> */}
-                <Row>
-                    <FooterHome />
-                </Row>
-
-            </Container>
-        </>
+            <FooterHome />
+        </div>
     )
 }
 

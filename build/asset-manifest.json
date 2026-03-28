@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8b440097.css",
+    "main.js": "/static/js/main.6325c821.js",
+    "static/media/loginBg.jpg": "/static/media/loginBg.7424379625a0d4417edd.jpg",
+    "static/media/signupBg.jpg": "/static/media/signupBg.54b3bd3e9d24c87797b9.jpg",
+    "static/media/forgotBg.jpg": "/static/media/forgotBg.5d2072c5fd728bc6e515.jpg",
+    "static/media/homePageBg.jpg": "/static/media/homePageBg.598a1955b9ccb2d36b03.jpg",
+    "static/media/satu.png": "/static/media/satu.4db90b013a9fb997c87d.png",
+    "static/media/dua.png": "/static/media/dua.2561823915cabc3857d1.png",
+    "static/media/homeCupCake.jpg": "/static/media/homeCupCake.219c10e61984c471085d.jpg",
+    "static/media/homecustomer2.jpg": "/static/media/homecustomer2.7a4dc838232718ea74a8.jpg",
+    "static/media/homecustomer1.jpg": "/static/media/homecustomer1.62450ee531b4eda6ce5c.jpg",
+    "static/media/homeCake.jpg": "/static/media/homeCake.444db0ede3483915990e.jpg",
+    "static/media/homePudding.jpg": "/static/media/homePudding.5d084bca00e633ebe4a3.jpg",
+    "index.html": "/index.html",
+    "main.8b440097.css.map": "/static/css/main.8b440097.css.map",
+    "main.6325c821.js.map": "/static/js/main.6325c821.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8b440097.css",
+    "static/js/main.6325c821.js"
+  ]
+}

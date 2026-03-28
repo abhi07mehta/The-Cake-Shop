@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
@@ -24,8 +24,13 @@ import Terms from "./pages/Terms";
 
 
 function App() {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
   return (
-    <Container fluid style={{background:"#F6F6F2"}} className="p-0 overflow-hidden">
+    <Container fluid style={{backgroundColor: "var(--background)", minHeight: "100vh"}} className="p-0 overflow-hidden">
       <UserAuthContextProvider>
       <Routes>
       <Route path="/" element={<Home />} />

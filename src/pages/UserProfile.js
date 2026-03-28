@@ -3,7 +3,7 @@ import { Card, Col, Container, ListGroup, Row, Spinner } from "react-bootstrap";
 import HeaderUser from "../components/HeaderUser";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase";
-import "firebase/firestore";
+// import "firebase/firestore";
 import { collection, getDocs, query, where } from "firebase/firestore";
 // import { async } from "@firebase/util";
 // import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa"

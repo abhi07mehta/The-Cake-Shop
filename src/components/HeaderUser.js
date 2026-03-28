@@ -3,7 +3,7 @@ import { Button, Container,Image, Nav, Navbar } from "react-bootstrap";
 import {  NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
-import qiuLogo from "../assets/QiuLogoSolid2.png"
+import qiuLogo from "../assets/logo.png"
 import { FiLogOut, FiShoppingCart } from "react-icons/fi"
 import './headerUser.css';
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { db } from "../firebase";
-import  "firebase/firestore";
+// import  "firebase/firestore";
 import { collection, doc, getDocs, limit, orderBy, query, startAfter, updateDoc } from "firebase/firestore";
 import { ReactTable } from "../components/t";
 import HeaderAdmin from '../components/HeaderAdmin'

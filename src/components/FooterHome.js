@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './footer.css'
-import qiuLogo from "../assets/QiuLogoSolid2.png"
+import qiuLogo from "../assets/logo.png"
 import { FaInstagram, FaFacebook, FaWhatsapp, FaLocationArrow, FaMailBulk, FaPhoneAlt } from "react-icons/fa"
 
 const FooterHome = () => {

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
 import { FiLogOut } from "react-icons/fi"
-import qiuLogo from "../assets/QiuLogoSolid2.png"
+import qiuLogo from "../assets/logo.png"
 import './headerAdmin.css';
 
 const HeaderAdmin = () => {

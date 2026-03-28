@@ -6,7 +6,7 @@ import {  useFormik } from "formik";
 import * as yup from "yup"
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase";
-import "firebase/firestore";
+// import "firebase/firestore";
 import { collection, getDocs,  query,  where, addDoc } from "firebase/firestore";
 import Footer from "../components/Footer";
 
