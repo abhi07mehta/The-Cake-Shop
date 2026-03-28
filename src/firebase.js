@@ -4,12 +4,12 @@ import { getFirestore } from "firebase/firestore";
 import {getStorage} from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAIgKhdR0vovtUzMUoIWQVrXjrNbjR7XmQ",
-  authDomain: "the-cake-shop-e03cc.firebaseapp.com",
-  projectId: "the-cake-shop-e03cc",
-  storageBucket: "the-cake-shop-e03cc.firebasestorage.app",
-  messagingSenderId: "860708705161",
-  appId: "1:860708705161:web:3e091193373cd703814758"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
