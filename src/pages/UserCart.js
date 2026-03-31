@@ -34,6 +34,12 @@ const UserCart = () => {
   const [progress,setProgress] = useState(0);
   const [downloadUrl, setDownloadUrl]= useState(0);
 
+  // Promo code state
+  const [promoCode, setPromoCode] = useState('');
+  const [promoApplied, setPromoApplied] = useState(null);
+  const [promoError, setPromoError] = useState('');
+  const [promoLoading, setPromoLoading] = useState(false);
+
   const storeImage = (e) =>{
 
     const file = e.target.files[0]
@@ -109,10 +115,57 @@ const uploadFile = (file)=>{
   };
 
   const subfinalPrice = cartProducts.map((item) => item.price * item.quantity);
-  const finalPrice = subfinalPrice.reduce(
+  const subtotal = subfinalPrice.reduce(
     (previousValue, currentValue) => previousValue + currentValue,
     0
   );
+
+  // Calculate discount from promo
+  let discount = 0;
+  if (promoApplied) {
+    if (promoApplied.type === 'percentage') {
+      discount = (subtotal * promoApplied.value) / 100;
+    } else {
+      discount = promoApplied.value;
+    }
+  }
+  const finalPrice = Math.max(0, subtotal - discount);
+
+  const validatePromo = async () => {
+    if (!promoCode.trim()) return;
+    if (promoApplied) {
+      setPromoError('Only 1 promo code allowed per order.');
+      return;
+    }
+    setPromoLoading(true);
+    setPromoError('');
+    try {
+      const q = query(
+        collection(db, 'promos'),
+        where('code', '==', promoCode.toUpperCase()),
+        where('active', '==', true),
+      );
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        setPromoError('Invalid or expired promo code.');
+      } else {
+        const promoData = snapshot.docs[0].data();
+        setPromoApplied(promoData);
+        setPromoError('');
+      }
+    } catch (e) {
+      setPromoError('Error validating code.');
+      console.log(e);
+    } finally {
+      setPromoLoading(false);
+    }
+  };
+
+  const removePromo = () => {
+    setPromoApplied(null);
+    setPromoCode('');
+    setPromoError('');
+  };
 
   // const subfinalPrice = cartProducts.map((item) => item.price * item.quantity);
   // const finalPrice = subfinalPrice.reduce(
@@ -277,7 +330,44 @@ const uploadFile = (file)=>{
                 {/* <h4 className="m-4">Please fill details to complete the Order</h4> */}
                 <div>
                   <div className="text-center fs-5">
-                    <span className="mx-2 fw-bold">Total Price: Rs. </span>
+                    <span className="mx-2 fw-bold">Subtotal: Rs. </span>
+                    {parseFloat(subtotal).toFixed(2)}
+                  </div>
+                  {/* Promo Code Input */}
+                  <div className="px-4 mt-3 mb-2">
+                    <Form.Label className="form-label-premium">Promo Code</Form.Label>
+                    <div className="d-flex gap-2">
+                      <Form.Control
+                        className="form-control-premium"
+                        type="text"
+                        placeholder="e.g. YUMMY20"
+                        value={promoCode}
+                        onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                        disabled={!!promoApplied}
+                        style={{ textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 600 }}
+                      />
+                      {promoApplied ? (
+                        <Button className="btn-outline-premium" onClick={removePromo} style={{ whiteSpace: 'nowrap', color: 'var(--danger)', borderColor: 'var(--danger)' }}>Remove</Button>
+                      ) : (
+                        <Button className="btn-premium" onClick={validatePromo} disabled={promoLoading} style={{ whiteSpace: 'nowrap' }}>
+                          {promoLoading ? 'Checking...' : 'Apply'}
+                        </Button>
+                      )}
+                    </div>
+                    {promoError && <small style={{ color: 'var(--danger)', marginTop: '0.25rem', display: 'block' }}>{promoError}</small>}
+                    {promoApplied && (
+                      <small style={{ color: 'var(--success)', marginTop: '0.25rem', display: 'block', fontWeight: 600 }}>
+                        ✅ "{promoApplied.code}" applied! {promoApplied.type === 'percentage' ? `${promoApplied.value}% off` : `₹${promoApplied.value} off`}
+                      </small>
+                    )}
+                  </div>
+                  {discount > 0 && (
+                    <div className="text-center mt-2" style={{ color: 'var(--success)', fontWeight: 600 }}>
+                      Discount: -Rs. {parseFloat(discount).toFixed(2)}
+                    </div>
+                  )}
+                  <div className="text-center fs-5 mt-2" style={{ fontWeight: 700, color: 'var(--primary)' }}>
+                    <span className="mx-2 fw-bold">Total: Rs. </span>
                     {parseFloat(finalPrice).toFixed(2)}
                   </div>
                   <Form className="px-2"> 

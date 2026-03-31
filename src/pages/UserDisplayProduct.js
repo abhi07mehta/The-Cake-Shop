@@ -1,5 +1,5 @@
 // import { async } from "@firebase/util";
-import { collection, getDocs, query,  where } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 // import { getDownloadURL, ref } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, ListGroup, ListGroupItem, Row } from "react-bootstrap";
@@ -8,12 +8,48 @@ import Footer from "../components/Footer";
 import HeaderUser from "../components/HeaderUser";
 import { db } from "../firebase";
 import { cartActions } from "../store/cart-slice";
+import { useUserAuth } from "../context/UserAuthContext";
+import { FiHeart } from "react-icons/fi";
 
 const UserDisplayProduct = () => {
     const [posts, setPosts] = useState([]);
     const [imgurl, setImgurl] = useState([]);
 
     const dispatch = useDispatch();
+    const { user } = useUserAuth();
+    const [wishlist, setWishlist] = useState([]);
+
+    // Fetch user's wishlist on mount
+    useEffect(() => {
+        const fetchWishlist = async () => {
+            if (!user?.uid) return;
+            try {
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    setWishlist(userDoc.data().wishlist || []);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchWishlist();
+    }, [user]);
+
+    const toggleWishlist = async (productId) => {
+        if (!user?.uid) return;
+        const userDocRef = doc(db, "users", user.uid);
+        try {
+            if (wishlist.includes(productId)) {
+                await updateDoc(userDocRef, { wishlist: arrayRemove(productId) });
+                setWishlist((prev) => prev.filter((id) => id !== productId));
+            } else {
+                await updateDoc(userDocRef, { wishlist: arrayUnion(productId) });
+                setWishlist((prev) => [...prev, productId]);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     // const getUrls = (post) => {
     //     // setImgurl([])
@@ -227,7 +263,8 @@ const UserDisplayProduct = () => {
                                             <ListGroupItem>Price: {product.value.price}</ListGroupItem>
                                         </ListGroup>
                                         <Card.Body>
-                                            {(product.value.quantity>0)?<Button className="w-100" variant="success"
+                                            <div className="d-flex gap-2">
+                                            {(product.value.quantity>0)?<Button className="btn-premium flex-grow-1"
 
 disabled={!(product.value.quantity>0)}
 onClick={() => {
@@ -246,6 +283,17 @@ onClick={() => {
         product.value.quantity
     ); alert("Moved to Cart");
 }}>Add To Cart</Button>:<Button className="w-100" disabled variant="warning">Sold out</Button>}
+                                            <Button
+                                                className="btn-outline-premium"
+                                                style={{
+                                                    color: wishlist.includes(product.id) ? '#ff4762' : 'var(--text-light)',
+                                                    borderColor: wishlist.includes(product.id) ? '#ff4762' : 'var(--border)',
+                                                }}
+                                                onClick={() => toggleWishlist(product.id)}
+                                            >
+                                                <FiHeart style={{ fill: wishlist.includes(product.id) ? '#ff4762' : 'none' }} />
+                                            </Button>
+                                            </div>
                                             
                                         </Card.Body>
                                     </Card>

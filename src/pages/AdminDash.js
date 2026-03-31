@@ -3,60 +3,54 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import HeaderAdmin from '../components/HeaderAdmin'
 import Footer from "../components/Footer";
-const AdminDash = () => {
+import { FiPlusCircle, FiPackage, FiLayers, FiShoppingBag, FiMessageSquare, FiUsers, FiTag } from "react-icons/fi";
 
+const AdminDash = () => {
   const navigate = useNavigate()
+
+  const cards = [
+    { icon: <FiPlusCircle />, title: "Add Product", desc: "Add new products with details, images, and pricing for your customers to browse.", path: "/adminaddproduct", color: "#c2935b" },
+    { icon: <FiPackage />, title: "Manage Products", desc: "View, edit, or remove existing products. The display mirrors what customers see.", path: "/admindisplayproduct", color: "#e6b981" },
+    { icon: <FiLayers />, title: "Custom Orders", desc: "Review and manage incoming custom cake requests from your customers.", path: "/admincustomcakeorder", color: "#ff6b81" },
+    { icon: <FiShoppingBag />, title: "Order History", desc: "Track all cake, pudding, and cupcake orders received from customers.", path: "/admindisplayorder", color: "#4caf50" },
+    { icon: <FiMessageSquare />, title: "Customer Feedback", desc: "Read and respond to feedback and reviews submitted by your customers.", path: "/adminfeedback", color: "#ff8c42" },
+    { icon: <FiUsers />, title: "Customer Details", desc: "View registered customer profiles, contact info, and order history.", path: "/adminuserdetails", color: "#6c63ff" },
+    { icon: <FiTag />, title: "Promo Codes", desc: "Create and manage discount codes to boost sales and reward loyal customers.", path: "/adminpromocodes", color: "#9b59b6" },
+  ];
+
   return (
-    <>
-      <Container fluid className="p-0 overflow-hidden">
-        <Row className="g-0 mb-5">
-          <HeaderAdmin />
-        </Row>
-        <Row>
-        <h2 className="text-center fs-4 shadow-lg p-2 mb-3 bg-body rounded mt-4"
-                        style={{backgroundColor: "#C2EDCE", 
-                        backgroundImage: "linear-gradient( 174.2deg,  #C2EDCE 7.1%, #BADFE7 67.4% )"}}
-                        >Admin Dashboard</h2>
-        </Row>
-        <Row className="g-0">
-          <Col style={{backgroundImage: "linear-gradient(to right, #badfe7, #c8e6e3, #daebe3, #eaf0e8, #f6f6f2)"}} className="p-3 m-2 rounded-start">
-            <h4 className="text-center">Add Product</h4>
-            <p>Add several products here in detail, so customers can see the products offered.</p>
-            <Button onClick={() =>  navigate("/adminaddproduct")} style={{ background: "#388087", border: "none" }}>Click here</Button>
-          </Col>
-          <Col style={{backgroundImage: "linear-gradient(to left, #badfe7, #c8e6e3, #daebe3, #eaf0e8, #f6f6f2)"}} className="p-3 m-2 rounded-end"><h4 className="text-center">Change Product</h4>
-            <p>The entire product display can be seen in this section. The display seen by the admin will be the same as the display seen by the customer</p>
-            <Button onClick={() =>  navigate("/admindisplayproduct")} style={{ background: "#388087", border: "none" }}>Click here</Button></Col>
-        </Row>
-        <Row className="g-0">
-          <Col style={{backgroundImage: "linear-gradient(to right, #badfe7, #c8e6e3, #daebe3, #eaf0e8, #f6f6f2)"}} className="p-3 m-2 rounded-start">
-          <h4 className="text-center">Custom Cake Orders</h4>
-            <p>Incoming order data from customers regarding custom cake orders can be checked in this section.</p>
-            <Button onClick={() =>  navigate("/admincustomcakeorder")} style={{ background: "#388087", border: "none" }}>Click here</Button>
-          </Col>
-          <Col style={{backgroundImage: "linear-gradient(to left, #badfe7, #c8e6e3, #daebe3, #eaf0e8, #f6f6f2)"}} className="p-3 m-2 rounded-end"><h4 className="text-center">Normal Order</h4>
-            <p>All details of cake, pudding and cupcake orders received from customers can be checked in this section.</p>
-            <Button onClick={() =>  navigate("/admindisplayorder")} style={{ background: "#388087", border: "none" }}>Click here</Button></Col>
-        </Row>
-        <Row className="g-0">
-          <Col style={{backgroundImage: "linear-gradient(to right, #badfe7, #c8e6e3, #daebe3, #eaf0e8, #f6f6f2)"}} className="p-3 m-2 rounded-start">
-          <h4 className="text-center">Customer Feedback</h4>
-            <p>Feedback given by customers can be checked in this section.</p>
-            <Button onClick={() =>  navigate("/adminfeedback")} style={{ background: "#388087", border: "none" }}>Click here</Button>
-          </Col>
-          <Col style={{backgroundImage: "linear-gradient(to left, #badfe7, #c8e6e3, #daebe3, #eaf0e8, #f6f6f2)"}} className="p-3 m-2 rounded-end">
-          <h4 className="text-center">Customer Details</h4>
-            <p>Details of each customer can be checked in this section.</p>
-            <Button onClick={() =>  navigate("/adminuserdetails")} style={{ background: "#388087", border: "none" }}>Click here</Button>
-          </Col>
-        </Row>
-        <Row className="g-0 mt-5">
-          <Footer />
+    <div className="page-wrapper">
+      <HeaderAdmin />
+      <Container style={{ paddingTop: '90px', paddingBottom: '2rem' }}>
+        <div className="text-center mb-5 pb-2">
+          <span className="section-subtitle">Management</span>
+          <h2 className="section-title">Admin Dashboard</h2>
+          <div className="section-divider"></div>
+        </div>
+
+        <Row className="g-4">
+          {cards.map((card, i) => (
+            <Col md={6} lg={4} key={i}>
+              <div className="dash-card d-flex flex-column">
+                <div className="d-flex align-items-center gap-3 mb-3">
+                  <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', background: `${card.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: card.color, fontSize: '1.3rem', flexShrink: 0 }}>
+                    {card.icon}
+                  </div>
+                  <h4 style={{ margin: 0 }}>{card.title}</h4>
+                </div>
+                <p>{card.desc}</p>
+                <Button onClick={() => navigate(card.path)} className="btn-premium mt-auto w-100">
+                  Open →
+                </Button>
+              </div>
+            </Col>
+          ))}
         </Row>
       </Container>
-
-
-    </>
+      <div className="mt-5">
+        <Footer />
+      </div>
+    </div>
   );
 };
 

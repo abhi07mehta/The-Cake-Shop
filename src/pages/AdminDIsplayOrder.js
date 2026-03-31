@@ -62,19 +62,30 @@ const AdminDisplayOrder = () =>{
 
 
 
-const handleComplete= async (id) =>{
-  try{
-      const q = doc(db, "orderRv", `${id}`);
-      await updateDoc(q, {
-          orderStatus:"Completed"   
-        })
-        // fetchMorePosts(lastKey)
-        alert(`Status of OrderId ${id} has been updated`);
+const handleStatusChange = async (id, newStatus) => {
+  // Confirmation for destructive actions
+  if (newStatus === "Cancelled") {
+    if (!window.confirm(`Are you sure you want to CANCEL order ${id}? This cannot be undone.`)) return;
   }
-  catch(e){
-      alert("error",e);
+  try {
+    const q = doc(db, "orderRv", `${id}`);
+    await updateDoc(q, {
+      orderStatus: newStatus,
+      lastModified: new Date().toISOString(),
+    });
+    alert(`Order ${id} status updated to "${newStatus}"`);
+    // Refresh the data
+    postsFirstBatch()
+      .then((res) => {
+        setPosts(res.posts);
+        setLastKey(res.lastKey);
+      })
+      .catch((err) => console.log(err));
+  } catch (e) {
+    alert("Error updating status");
+    console.log(e);
   }
-}
+};
 
 const fetchMorePosts = (key) => {
   if (key.length > 0) {
@@ -140,11 +151,28 @@ const fetchMorePosts = (key) => {
         accessor:"orderStatus"
       },
       {
-        Header: "Status",
+        Header: "Update Status",
         Cell: cell => (
-          <button className="bg-success rounded" disabled={cell.row.values.orderStatus !== "Processing"}   onClick={()=>handleComplete(cell.row.values.id)}>
-            Completed
-          </button>
+          <select
+            value={cell.row.values.orderStatus}
+            onChange={(e) => handleStatusChange(cell.row.values.id, e.target.value)}
+            style={{
+              padding: '4px 8px',
+              borderRadius: '6px',
+              border: '1px solid var(--border)',
+              background: 'var(--surface)',
+              color: 'var(--text-main)',
+              fontSize: '0.85rem',
+              cursor: 'pointer',
+            }}
+          >
+            <option value="Processing">Processing</option>
+            <option value="Baking">Baking</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
         )
       }
     ], []

@@ -1,95 +1,67 @@
 import React from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import HeaderUser from "../components/HeaderUser";
 import homeCake from "../assets/homeCake.jpg"
 import homeCupcake from "../assets/homeCupCake.jpg"
 import homepudding from "../assets/homePudding.jpg"
-// import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa"
 import FooterHome from "../components/FooterHome";
 import { useNavigate } from "react-router";
 
-const AdminDash = () => {
+const UserDash = () => {
   const navigate = useNavigate()
+  
+  const products = [
+    { img: homeCupcake, title: "Premium Cupcakes", desc: "Miniature works of art in beautiful cups. Attractive packaging, perfectly portioned for sweet cravings and celebrations.", align: "left" },
+    { img: homeCake, title: "Signature Cakes", desc: "Handcrafted masterpieces with premium wheat flour, sugar, eggs, and rich butter. Perfect for any celebration.", align: "right" },
+    { img: homepudding, title: "Artisan Pudding", desc: "Silky, smooth, luxuriously creamy desserts made from the finest cream and milk. Melts perfectly in your mouth.", align: "left" },
+  ];
+
   return (
-    <>
-    <Container fluid className="p-0 overflow-hidden">
-    <Row className="g-0 mb-5">
+    <div className="page-wrapper">
       <HeaderUser />
-    </Row>
-    <Row className="g-0 pt-4">
-        <h2 className="text-center p-3">Welcome to The Cake Shop</h2>
-        <p className="text-center p-1">Everyone's Choice</p>
-    </Row>
-    <Row className="g-0">
-    <Row className="g-0">
-        <h2 className="text-center fs-4 shadow-lg p-2 mb-3 bg-body rounded mt-4"
-                        style={{backgroundColor: "#C2EDCE", 
-                        backgroundImage: "linear-gradient( 174.2deg,  #C2EDCE 7.1%, #BADFE7 67.4% )"}}
-                        >Product Selection</h2>
-        </Row>
-                    <Row className="g-0">
-                      <Row className="g-0">
-                      <Col>
-                            <Card className="bg-warning border-0">
-                                <Card.Img className="rounded-start mx-2" height={"250px"} width={"250px"} variant="top" src={`${homeCupcake}`} />
-                                
-                            </Card>
-                        </Col>
-                        <Col md={8}>
-                        <Card.Body>
-                                    <Card.Title>Cup Cakes</Card.Title>
-                                    <Card.Text>
-                                    Cupcakes are like miniatures of large cakes that are placed in cups made of colored paper. Cupcakes have attractive appearance because it is packaged in containers small and beautiful.
-                                    </Card.Text>
-                                    <Button onClick={() =>  navigate("/userdisplayproduct")} style={{ background: "#388087", border: "none" }}>Buy</Button>
-                                </Card.Body>
-                        </Col>
-                      </Row>
-                      <hr className="m-4 w-75 mx-auto " />
-                        <Row className="g-0">
-                          <Col md={8}>
-                          <Card.Body>
-                                    <Card.Title>Cakes</Card.Title>
-                                    <Card.Text>Cake made with baking dough consisting of wheat flour, sugar, eggs, milk, fat, and raising agents with or without addition of other permitted food additives.
-                                    </Card.Text>
-                                    <Button onClick={() =>  navigate("/userdisplayproduct")} style={{ background: "#388087", border: "none" }}>Buy</Button>
-                                </Card.Body>
-                          </Col>
-                        <Col>
-                            <Card className="bg-warning border-0 pe-2">
-                                <Card.Img className="rounded-end" height={"250px"} width={"250px"} variant="top" src={`${homeCake}`} />
-                            </Card>
-                        </Col>
-                        </Row>
-                        <hr className="m-4 w-75 mx-auto " />
-                        <Row className="g-0 mb-3">
+      <Container style={{ paddingTop: '90px', paddingBottom: '2rem' }}>
+        {/* Welcome Banner */}
+        <div className="text-center mb-5 pb-3">
+          <span className="section-subtitle">Welcome Back!</span>
+          <h2 className="section-title">The Cake Shop</h2>
+          <p style={{ color: 'var(--text-light)', maxWidth: '500px', margin: '0 auto' }}>Browse our exquisite selection of handcrafted treats</p>
+          <div className="section-divider mt-3"></div>
+        </div>
 
-                        <Col >
-                            <Card className="bg-warning border-0">
-                                <Card.Img className="rounded-start mx-2" height={"250px"} width={"250px"} variant="top" src={`${homepudding}`} />
-                            </Card>
-                        </Col>
-
-                          <Col md={8}>
-                          <Card.Body>
-                                    <Card.Title>Pudding</Card.Title>
-                                    <Card.Text> Pudding is a dessert dish or what is known as dessert,made from cream or milk, cooked with flour that thickens easily, namely tapioca flour or corn flour.
-                                    </Card.Text>
-                                    <Button onClick={() =>  navigate("/userdisplayproduct")} style={{ background: "#388087", border: "none" }}>Buy</Button>
-                                </Card.Body>
-                          </Col>
-
-                        </Row>
-                        
-                    </Row>
-                </Row>
-                <Row>
-                    <FooterHome />
-                </Row>
-    </Container>
-    
-    </>
+        {/* Products */}
+        {products.map((product, i) => (
+          <div key={i} className="dash-card mb-4">
+            <Row className="align-items-center g-4">
+              {product.align === 'left' ? (
+                <>
+                  <Col md={4}>
+                    <img src={product.img} alt={product.title} style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} />
+                  </Col>
+                  <Col md={8}>
+                    <h3 style={{ color: 'var(--text-main)' }}>{product.title}</h3>
+                    <p style={{ color: 'var(--text-light)', lineHeight: 1.7 }}>{product.desc}</p>
+                    <Button onClick={() => navigate("/userdisplayproduct")} className="btn-premium">Browse & Buy →</Button>
+                  </Col>
+                </>
+              ) : (
+                <>
+                  <Col md={8}>
+                    <h3 style={{ color: 'var(--text-main)' }}>{product.title}</h3>
+                    <p style={{ color: 'var(--text-light)', lineHeight: 1.7 }}>{product.desc}</p>
+                    <Button onClick={() => navigate("/userdisplayproduct")} className="btn-premium">Browse & Buy →</Button>
+                  </Col>
+                  <Col md={4}>
+                    <img src={product.img} alt={product.title} style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} />
+                  </Col>
+                </>
+              )}
+            </Row>
+          </div>
+        ))}
+      </Container>
+      <FooterHome />
+    </div>
   );
 };
 
-export default AdminDash;
+export default UserDash;

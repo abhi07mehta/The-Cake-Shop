@@ -1,92 +1,101 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Image, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../context/UserAuthContext";
-import { FiLogOut } from "react-icons/fi"
+import { FiLogOut, FiMenu, FiPackage, FiPlusCircle, FiGrid, FiLayers, FiShoppingBag, FiMessageSquare, FiUsers, FiTag } from "react-icons/fi"
 import qiuLogo from "../assets/logo.png"
-import './headerAdmin.css';
 
 const HeaderAdmin = () => {
-  // const [active, setActive] = useState(0);
-
   const { logOut } = useUserAuth();
   const navigate = useNavigate();
+  const [currentTheme, setCurrentTheme] = useState('light');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setCurrentTheme(savedTheme);
+  }, []);
+
+  const changeTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    setCurrentTheme(theme);
+  };
+
   const handleLogout = async () => {
     try {
       await logOut();
       navigate("/");
     } catch (error) {
-      alert("Error",error);
+      alert("Error", error);
     }
   };
+
+  const menuItems = [
+    { path: '/admindash', label: 'Dashboard', icon: <FiGrid className="me-2" /> },
+    { path: '/adminaddproduct', label: 'Add Product', icon: <FiPlusCircle className="me-2" /> },
+    { path: '/admindisplayproduct', label: 'Products', icon: <FiPackage className="me-2" /> },
+    { path: '/admincustomcakeorder', label: 'Custom Orders', icon: <FiLayers className="me-2" /> },
+    { path: '/admindisplayorder', label: 'Order History', icon: <FiShoppingBag className="me-2" /> },
+    { path: '/adminfeedback', label: 'Feedback', icon: <FiMessageSquare className="me-2" /> },
+    { path: '/adminuserdetails', label: 'Customers', icon: <FiUsers className="me-2" /> },
+    { path: '/adminpromocodes', label: 'Promo Codes', icon: <FiTag className="me-2" /> },
+  ];
+
   return (
-    <>
-      <Container className="m-0 px-2 fixed-top overflow-hidden" style={{ backgroundImage: "linear-gradient(to bottom, #6fb3b8, #82bec4, #95c9d0, #a7d4dc, #badfe7)" }}>
-        <Navbar expand={false} className="p-0">
+    <Navbar expand={false} fixed="top" className="header-glass py-2">
+      <Container>
+        <Navbar.Toggle aria-controls="admin-offcanvas" className="border-0 shadow-none p-2" style={{ color: 'var(--text-main)' }}>
+          <FiMenu className="fs-4" />
+        </Navbar.Toggle>
 
-          <Navbar.Toggle className="px-2" style={{ color: "#388087" }} aria-controls={`offcanvasNavbar-expand-${false}`} />
-          <Navbar.Offcanvas
-            id={`offcanvasNavbar-expand-${false}`}
-            aria-labelledby={`offcanvasNavbarLabel-expand-${false}`}
-            placement="start"
-            style={{ width: "300px" }}
-          >
-            <Offcanvas.Header style={{ background: "#C2EDCE" }} closeButton>
-              <Offcanvas.Title className="fs-3 m-2" id={`offcanvasNavbarLabel-expand-${false}`}>
-                Admin
-              </Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body style={{ backgroundImage: "linear-gradient(to right, #6fb3b8, #82bec4, #95c9d0, #a7d4dc, #badfe7)" }}>
-              <Nav className="justify-content-end flex-grow-1">
+        <Navbar.Offcanvas
+          id="admin-offcanvas"
+          placement="start"
+          style={{ width: "300px", background: "var(--background)", borderRight: "1px solid var(--border-light)" }}
+        >
+          <Offcanvas.Header closeButton style={{ borderBottom: '1px solid var(--border-light)', padding: '1.25rem 1.5rem' }}>
+            <Offcanvas.Title>
+              <div className="d-flex align-items-center gap-2">
+                <Image style={{ width: "36px", height: "36px", objectFit: "contain" }} src={qiuLogo} />
+                <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "var(--text-main)", fontSize: "1.1rem" }}>Admin Panel</span>
+              </div>
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body style={{ padding: '1rem' }}>
+            <Nav className="flex-column">
+              {menuItems.map(item => (
                 <NavLink
-                  exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')}
-                  to="/admindash"
-                >Admin Dashboard
+                  key={item.path}
+                  className={(navData) => (navData.isActive ? 'admin-nav-link-active' : 'admin-nav-link')}
+                  to={item.path}
+                >
+                  {item.icon}{item.label}
                 </NavLink>
+              ))}
+            </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
 
-                <NavLink exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')} 
-                  to="/adminaddproduct" 
-                  >Add Product</NavLink>
+        <Navbar.Brand as={NavLink} to="/admindash" className="d-flex align-items-center mx-auto">
+          <Image style={{ width: "42px", height: "42px", objectFit: "contain" }} className="me-2" src={qiuLogo} />
+          <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "var(--text-main)", fontSize: "1.15rem" }}>The Cake Shop</span>
+        </Navbar.Brand>
 
-                <NavLink exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')} 
-                  to="/admindisplayproduct" 
-                  >Display Product</NavLink>
+        <div className="d-flex align-items-center gap-2">
+          {/* Theme Switcher */}
+          <div className="theme-switcher d-none d-md-flex me-2">
+            <div onClick={() => changeTheme('light')} className={`theme-dot ${currentTheme === 'light' ? 'active' : ''}`} style={{ background: 'linear-gradient(135deg, #fdfbf7, #e8dfd4)', border: '2px solid #c2935b' }} title="Light" />
+            <div onClick={() => changeTheme('dark')} className={`theme-dot ${currentTheme === 'dark' ? 'active' : ''}`} style={{ background: 'linear-gradient(135deg, #1a1714, #2a2420)', border: '2px solid #e6b981' }} title="Dark" />
+            <div onClick={() => changeTheme('yummy')} className={`theme-dot ${currentTheme === 'yummy' ? 'active' : ''}`} style={{ background: 'linear-gradient(135deg, #ff6b81, #ff8c42)', border: '2px solid #ff4762' }} title="Yummy" />
+          </div>
 
-                <NavLink exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')} 
-                  to="/admincustomcakeorder" 
-                  >Order Custom Cake</NavLink>
-
-                <NavLink exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')} 
-                  to="/admindisplayorder" 
-                  >display order</NavLink>
-
-                <NavLink exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')} 
-                  to="/adminfeedback" 
-                  >FeedBack</NavLink>
-
-                <NavLink exact
-                  className={(navData) => (navData.isActive ? 'navbar__link--active m-2 fs-4 ' : 'navbar__link m-2 fs-4 ')} 
-                  to="/adminuserdetails" 
-                  >Customer Detail</NavLink>
-              </Nav>
-            </Offcanvas.Body>
-          </Navbar.Offcanvas>
-          <Navbar.Brand className=" p-0 m-0" href="#">
-            <Image style={{ width: "140px", height: "55px", }} className=" border-0 m-0 rounded-pill p-0" src={qiuLogo} />
-
-          </Navbar.Brand>
-          <Button style={{ background: "#388087", border: "none" }} className="mx-2 my-0 px-2 py-1 fw-bold" onClick={handleLogout}><FiLogOut className="fs-4" /></Button>
-
-        </Navbar>
+          <Button className="btn-premium py-2 px-3 d-flex align-items-center gap-1" onClick={handleLogout}>
+            <FiLogOut className="fs-5" />
+          </Button>
+        </div>
       </Container>
-    </>
+    </Navbar>
   )
 }
 

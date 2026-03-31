@@ -1,110 +1,103 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import './footer.css'
 import qiuLogo from "../assets/logo.png"
-import { FaInstagram, FaFacebook, FaWhatsapp, FaLocationArrow, FaMailBulk, FaPhoneAlt } from "react-icons/fa"
+import { FaInstagram, FaFacebook, FaWhatsapp, FaPhoneAlt } from "react-icons/fa"
+import { FiMail, FiMapPin } from "react-icons/fi"
 
 const FooterHome = () => {
     return (
         <>
-        <section class="deneb_cta">
-	<div class="container">
-		<div class="cta_wrapper">
-			<div class="row align-items-center">
-				<div class="col-lg-7">
-					<div class="cta_content">
-						<h3> Want to design yourself?</h3>
-						<p>We also make cakes based on your request</p>
-					</div>
-				</div>
-				<div class="col-lg-5">
-                            <Button style={{background:"#388087",border:"none"}} className="mx-5 px-5 py-2">
-                                <Link style={{textDecoration:"none",color:"white"}} to="/usercustomcake" >Custom Cake</Link>
-                            </Button>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-            <footer className="deneb_footer">
-	<div className="widget_wrapper" >
-		<div className="container">
-			<div className="row">
-				<div className="col-lg-4 col-md-6 col-12">
-					<div className="widget widegt_about">
-						<div className="widget_title">
-                        <img style={{width:"170px",height:"65px",}} alt="qiu" className=" border-0 m-0 rounded-pill p-0"  src={qiuLogo} />
-						</div>
-						<p className = "mx-5">Made with Love and Creativity</p>
-						<ul className="social">
-							<li><a href="_#"><FaFacebook className="fs-2" /></a></li>
-							<li><a target="_blank" href="/"><FaWhatsapp className="fs-2" /></a></li>
-							<li><a target="_blank" href="/"><FaInstagram className="fs-2" /></a></li>
-						</ul>
-					</div>
-				</div>
-				<div className="col-lg-4 col-md-6 col-sm-12">
-					<div className="widget widget_link">
-						<div className="widget_title">
-							<h4>Links</h4>
-						</div>
-						<ul>
-							<li><a href="_#">About Us</a></li>
-							<li><a href="_#">Service</a></li>
-							<li><a href="_#">Portfolio</a></li>
-							<li><a href="_#">Blog</a></li>
-						</ul>
-					</div>
-				</div>
-				<div className="col-lg-4 col-md-6 col-sm-12">
-					<div className="widget widget_contact">
-						<div className="widget_title">
-							<h4>Contact</h4>
-						</div>
-						<div className="contact_info">
-							<div className="single_info">
-								<div className="icon">
-									<FaPhoneAlt className="fs-3"/>
-								</div>
-								<div className="info">
-									<p><a href="tel:+918866443258">+91 8866443258</a></p>
-								</div>
-							</div>
-							<div className="single_info">
-								<div className="icon">
-                                    <FaMailBulk className="fs-3"/>
-								</div>
-								<div className="info">
-									<p><a href="mailto:info@deneb.com">TCScakes@gmail.com</a></p>
-								</div>
-							</div>
-							<div className="single_info">
-								<div className="icon">
-									<FaLocationArrow className="fs-3"/>
-								</div>
-								<div className="info">
-									<p>Lonavala Hills<span>Pune</span></p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div className="copyright_area">
-		<div className="container">
-			<div className="row">
-				<div className="col-lg-12">
-					<div className="copyright_text">
-						<p>Copyright &copy; 2024 All rights reserved.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
+            {/* CTA Banner */}
+            <section style={{ padding: '0 1rem', marginBottom: '-60px', position: 'relative', zIndex: 2 }}>
+                <div className="footer-cta">
+                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', marginBottom: '0.5rem' }}>Want a Custom Design?</h3>
+                    <p style={{ opacity: 0.9, marginBottom: '1.5rem', fontSize: '1.05rem' }}>We craft cakes tailored to your imagination. Tell us your dream cake!</p>
+                    <Link to="/usercustomcake" style={{ textDecoration: 'none' }}>
+                        <button style={{ background: '#fff', color: 'var(--primary)', border: 'none', borderRadius: 'var(--radius-sm)', padding: '0.8rem 2.5rem', fontFamily: "'Outfit', sans-serif", fontWeight: 600, fontSize: '1rem', cursor: 'pointer', transition: 'all 0.3s ease' }}
+                            onMouseOver={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)'; }}
+                            onMouseOut={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}
+                        >
+                            Order Custom Cake
+                        </button>
+                    </Link>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="footer-modern" style={{ paddingTop: '100px' }}>
+                <Container style={{ paddingBottom: '2rem' }}>
+                    <Row className="g-4">
+                        <Col lg={4} md={6}>
+                            <div className="d-flex align-items-center mb-3">
+                                <img style={{ width: "42px", height: "42px", objectFit: "contain" }} alt="logo" className="me-2" src={qiuLogo} />
+                                <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "var(--text-main)", fontSize: "1.15rem" }}>The Cake Shop</span>
+                            </div>
+                            <p style={{ color: 'var(--text-light)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+                                Made with love and creativity since 2009. Crafting sweet memories one cake at a time.
+                            </p>
+                            <div className="d-flex gap-2">
+                                <a href="_#" className="social-icon"><FaFacebook /></a>
+                                <a href="/" className="social-icon"><FaWhatsapp /></a>
+                                <a href="/" className="social-icon"><FaInstagram /></a>
+                            </div>
+                        </Col>
+
+                        <Col lg={2} md={6}>
+                            <h4>Quick Links</h4>
+                            <ul style={{ listStyle: 'none', padding: 0 }}>
+                                {['About Us', 'Products', 'Custom Cakes', 'Gallery'].map(item => (
+                                    <li key={item} style={{ marginBottom: '0.6rem' }}>
+                                        <a href="_#" style={{ color: 'var(--text-light)', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s' }}
+                                            onMouseOver={(e) => e.target.style.color = 'var(--primary)'}
+                                            onMouseOut={(e) => e.target.style.color = 'var(--text-light)'}
+                                        >{item}</a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Col>
+
+                        <Col lg={2} md={6}>
+                            <h4>Support</h4>
+                            <ul style={{ listStyle: 'none', padding: 0 }}>
+                                {['FAQ', 'Returns', 'Delivery', 'Terms'].map(item => (
+                                    <li key={item} style={{ marginBottom: '0.6rem' }}>
+                                        <a href="_#" style={{ color: 'var(--text-light)', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s' }}
+                                            onMouseOver={(e) => e.target.style.color = 'var(--primary)'}
+                                            onMouseOut={(e) => e.target.style.color = 'var(--text-light)'}
+                                        >{item}</a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Col>
+
+                        <Col lg={4} md={6}>
+                            <h4>Contact Us</h4>
+                            <div className="d-flex align-items-start gap-3 mb-3">
+                                <FaPhoneAlt style={{ color: 'var(--primary)', marginTop: '4px', flexShrink: 0 }} />
+                                <div>
+                                    <a href="tel:+918866443258" style={{ color: 'var(--text-light)', textDecoration: 'none', fontSize: '0.95rem' }}>+91 8866443258</a>
+                                </div>
+                            </div>
+                            <div className="d-flex align-items-start gap-3 mb-3">
+                                <FiMail style={{ color: 'var(--primary)', marginTop: '4px', flexShrink: 0 }} />
+                                <div>
+                                    <a href="mailto:TCScakes@gmail.com" style={{ color: 'var(--text-light)', textDecoration: 'none', fontSize: '0.95rem' }}>TCScakes@gmail.com</a>
+                                </div>
+                            </div>
+                            <div className="d-flex align-items-start gap-3">
+                                <FiMapPin style={{ color: 'var(--primary)', marginTop: '4px', flexShrink: 0 }} />
+                                <p style={{ color: 'var(--text-light)', margin: 0, fontSize: '0.95rem' }}>Lonavala Hills, Pune</p>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+                <div className="footer-bottom">
+                    <Container>
+                        <p style={{ margin: 0 }}>© 2024 The Cake Shop. All rights reserved.</p>
+                    </Container>
+                </div>
+            </footer>
         </>
     )
 }
